@@ -849,6 +849,7 @@ function gutenberg_editor_scripts_and_styles( $hook ) {
 	$gutenberg_theme_support = get_theme_support( 'gutenberg' );
 	$align_wide              = get_theme_support( 'align-wide' );
 	$color_palette           = get_theme_support( 'editor-color-palette' );
+	$disable_custom_colors   = get_theme_support( 'disable-custom-colors' );
 
 	// Backcompat for Color Palette set through `gutenberg` array.
 	if ( empty( $color_palette ) && ! empty( $gutenberg_theme_support[0]['colors'] ) ) {
@@ -879,6 +880,10 @@ function gutenberg_editor_scripts_and_styles( $hook ) {
 		'blockTypes'         => $allowed_block_types,
 		'titlePlaceholder'   => apply_filters( 'enter_title_here', __( 'Add title', 'gutenberg' ), $post ),
 	);
+
+	if ( ! empty( $disable_custom_colors ) && is_bool( $disable_custom_colors[0] ) ) {
+		$editor_settings['disableCustomColors'] = $disable_custom_colors[0];
+	}
 
 	if ( ! empty( $color_palette ) ) {
 		$editor_settings['colors'] = $color_palette;

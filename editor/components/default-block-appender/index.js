@@ -13,7 +13,7 @@ import { __ } from '@wordpress/i18n';
  */
 import './style.scss';
 import BlockDropZone from '../block-drop-zone';
-import { appendDefaultBlock } from '../../store/actions';
+import { appendDefaultBlock, startTyping } from '../../store/actions';
 
 export function DefaultBlockAppender( { onAppend, showPrompt = true } ) {
 	return (
@@ -44,6 +44,7 @@ export default connect(
 			}
 
 			dispatch( appendDefaultBlock( attributes, rootUID ) );
+			dispatch( startTyping() );
 		},
 	} ),
 )( DefaultBlockAppender );

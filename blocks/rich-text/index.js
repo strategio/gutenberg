@@ -546,7 +546,6 @@ export class RichText extends Component {
 				const beforeElement = nodeListToReact( beforeNodes, createTinyMCEElement );
 				const afterElement = nodeListToReact( afterNodes, createTinyMCEElement );
 
-				this.setContent( beforeElement );
 				this.props.onSplit( beforeElement, afterElement );
 			} else {
 				event.preventDefault();
@@ -606,10 +605,8 @@ export class RichText extends Component {
 			const beforeElement = nodeListToReact( beforeFragment.childNodes, createTinyMCEElement );
 			const afterElement = isLinkBoundary( afterFragment ) ? [] : nodeListToReact( afterFragment.childNodes, createTinyMCEElement );
 
-			this.setContent( beforeElement );
 			this.props.onSplit( beforeElement, afterElement, ...blocks );
 		} else {
-			this.setContent( [] );
 			this.props.onSplit( [], [], ...blocks );
 		}
 	}

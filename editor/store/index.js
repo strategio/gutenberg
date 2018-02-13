@@ -14,6 +14,7 @@ import {
 	getEditedPostTitle,
 	getSelectedBlockCount,
 	getCurrentPostSlug,
+	getBlocks,
 } from './selectors';
 
 /**
@@ -33,6 +34,7 @@ registerSelectors( MODULE_KEY, {
 	getEditedPostTitle,
 	getSelectedBlockCount,
 	getCurrentPostSlug,
+	getBlocks,
 } );
 
 export default store;

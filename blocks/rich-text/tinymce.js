@@ -28,13 +28,16 @@ export default class TinyMCE extends Component {
 		return false;
 	}
 
-	componentWillReceiveProps( nextProps ) {
+	configureIsPlaceholderVisible( isPlaceholderVisible ) {
 		const name = 'data-is-placeholder-visible';
-		const isPlaceholderVisible = String( !! nextProps.isPlaceholderVisible );
-
-		if ( this.editorNode.getAttribute( name ) !== isPlaceholderVisible ) {
-			this.editorNode.setAttribute( name, isPlaceholderVisible );
+		const isPlaceholderVisibleString = String( !! isPlaceholderVisible );
+		if ( this.editorNode.getAttribute( name ) !== isPlaceholderVisibleString ) {
+			this.editorNode.setAttribute( name, isPlaceholderVisibleString );
 		}
+	}
+
+	componentWillReceiveProps( nextProps ) {
+		this.configureIsPlaceholderVisible( nextProps.isPlaceholderVisible );
 
 		if ( ! isEqual( this.props.style, nextProps.style ) ) {
 			this.editorNode.setAttribute( 'style', '' );
@@ -88,6 +91,7 @@ export default class TinyMCE extends Component {
 			setup: ( editor ) => {
 				this.editor = editor;
 				this.props.onSetup( editor );
+				this.configureIsPlaceholderVisible( this.props.isPlaceholderVisible );
 			},
 		} );
 	}
